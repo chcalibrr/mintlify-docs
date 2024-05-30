@@ -26,12 +26,7 @@
     "name": "Dashboard",
     "url": "https://dashboard.mintlify.com"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
+
   "anchors": [
     {
       "name": "Start Here",
@@ -71,6 +66,7 @@
             "ticket-handling/context",
             "ticket-handling/sop",
             "ticket-handling/actions",
+            "ticket-handling/voc",
             "ticket-handling/brand",
             "ticket-handling/regulated-specific-responses",
             "ticket-handling/test"
@@ -107,6 +103,7 @@
       "pages": [
         "settings/ticket-close",
         "settings/do-not-automate",
+        "settings/player-auth",
         "settings/create-brand"
       ]
     }
