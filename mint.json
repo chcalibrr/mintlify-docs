@@ -26,12 +26,13 @@
     "name": "Dashboard",
     "url": "https://dashboard.mintlify.com"
   },
+  "tabs": [],
 
   "anchors": [
     {
       "name": "Start Here",
       "icon": "rocket",
-      "url": "https://setup.chatform.com/introduction"
+      "url": "introduction"
     },
     {
       "name": "Schedule a Demo",
@@ -43,6 +44,7 @@
     {
       "group": "Get Started",
       "pages": [
+        "introduction",
         "quickstart/create-account",
         "quickstart/connect-support-desk",
         "quickstart/connect-knowlage",
