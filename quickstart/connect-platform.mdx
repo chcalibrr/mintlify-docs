@@ -1,4 +1,250 @@
 ---
-description: 'Display inline code and code blocks'
+title: 'Connect casino backoffice platform'
+description: 'Integrating Casino Backoffice Platform with Chatform'
 icon: 'webhook'
 ---
+<img
+  src="/images/platform-integration.png"
+  alt="Hero Dark"
+/>
+# Leveraging Full Reasoning and Decision-Making Capabilities with Chatform
+
+The full power and magic of Chatforms AI agent resolution capabilities are unleashed when integrated with your casino backoffice platform. This integration allows the AI agent to access comprehensive player data, enabling advanced reasoning and decision-making automations that streamline ticket resolutions. 
+
+## Data Integration and Mapping
+
+Chatform offers robust capabilities to connect the AI agent to your backoffice system. By pulling data and mapping it to internal attributes, Chatform ensures that every support ticket is handled with the full context of the player's activity and profile. This includes data such as total bets wagered, total deposits, and more, allowing for more informed and efficient resolution of support tickets. The extend of the data needed is dependent on the brands ticket handling instructions (SOPs)
+
+### Examples of Data Utilized
+
+1. **Total Amount of Bets Wagered**
+2. **Total Deposits**
+3. **Player Category**
+4. **First Deposit**
+5. **Transaction Details (Deposits, Bets, Withdrawals, Bonuses, timestamps)**
+6. **Bets Placed (Casinos/Sports)**
+7. **Account Bonus Information (Real Balance, Bonus Balance, List of Bonuses)**
+
+## Detailed API Documentation
+
+Below is a detailed list of APIs and endpoints commonly used in the context of ticket resolution:
+
+### Get Complete Player Details
+**Endpoint:** `/api/player/details`
+
+**Description:** Retrieves the full profile of a player, including their category (e.g., VIP, regular).
+
+**Response Fields:**
+- `player_id`: Unique identifier for the player
+- `name`: Player's name
+- `email`: Player's email
+- `category/tier`: Player category (e.g., VIP, regular)
+- `Responsible gaming deposit limits`: RG deposit limits of a player, 
+- `Responsible gaming deposit limits`: RG loss limits of a player, 
+- `Active withdrawal`: Is there an active pending withdrawal, 
+
+### Authentication Flow
+**Endpoint:** `/api/player/authenticate`
+
+**Description:** Authenticates a player using provided credentials.
+
+**Response Fields:**
+- `status`: Authentication status (success/failure)
+- `player_id`: Unique identifier for the player (if authenticated)
+
+Read more in [Player Authentication Quickstart Guide](/quickstart/connect-platform#player-authentication)
+
+### Get Player Transaction Summary
+**Endpoint:** `/api/player/transactions/summary`
+
+**Description:** Retrieves a summary of the player's transactions, including deposits, withdrawals, and bonuses.
+
+**Response Fields:**
+- `total_deposits`: Total amount deposited by the player
+- `total_withdrawals`: Total amount withdrawn by the player
+- `total_bonuses`: Total amount of bonuses received by the player
+
+### List of Transactions
+**Endpoint:** `/api/player/transactions`
+
+**Description:** Provides detailed information about all transactions made by the player.
+
+**Response Fields:**
+- `transaction_id`: Unique identifier for the transaction
+- `timestamp`: Date and time of the transaction
+- `type`: Type of transaction (deposit, bet, withdrawal, bonus)
+- `amount`: Amount of the transaction
+
+### List of Bets Placed
+**Endpoint:** `/api/player/bets`
+
+**Description:** Retrieves details of all bets placed by the player, classified by casino or sports.
+
+**Response Fields:**
+- `bet_id`: Unique identifier for the bet
+- `timestamp`: Date and time of the bet
+- `category`: Category of the bet (casino/sports)
+- `amount`: Amount wagered
+
+### Account Bonus Information
+**Endpoint:** `/api/player/bonuses`
+
+**Description:** Provides detailed information about the player's bonuses, including real and bonus balances.
+
+**Response Fields:**
+- `real_balance`: Current real money balance
+- `bonus_balance`: Current bonus balance
+- `bonuses`: List of bonuses received
+
+### Deposits API
+**Endpoint:** `/api/player/deposits`
+
+**Description:** Retrieves detailed information about the player's deposits.
+
+**Response Fields:**
+- `deposit_id`: Unique identifier for the deposit
+- `timestamp`: Date and time of the deposit
+- `amount`: Amount deposited
+
+### Get Player KYC Details
+**Endpoint:** `/api/player/kyc-details`
+
+**Description:** Retrieves the Know Your Customer (KYC) details for a specific player, including verification status and required documents.
+
+**Response Fields:**
+- `player_id`: Unique identifier for the player
+- `kyc_status`: KYC verification status (e.g., verified, pending, failed)
+- `documents`: List of required documents and their statuses
+  - `document_type`: Type of document (e.g., ID, proof of address)
+  - `status`: Status of the document (e.g., submitted, verified, rejected)
+  - `submitted_date`: Date the document was submitted
+
+**Example Response:**
+```json
+{
+  "player_id": "12345",
+  "kyc_status": "verified",
+  "documents": [
+    {
+      "document_type": "ID",
+      "status": "verified",
+      "submitted_date": "2024-01-15"
+    },
+    {
+      "document_type": "proof_of_address",
+      "status": "verified",
+      "submitted_date": "2024-01-16"
+    }
+  ]
+}
+```
+
+### Get RG Closed Details
+**Endpoint:** `/api/player/rg-closed`
+
+**Description:** Returns whether the player has a Responsible Gaming (RG) closure, indicating if the player is restricted from playing due to RG policies.
+
+**Response Fields:**
+- `player_id`: Unique identifier for the player
+- `rg_closed`: Boolean value indicating RG closure status (true or false)
+
+**Example Response:**
+```json
+{
+  "player_id": "12345",
+  "rg_closed": true
+}
+```
+
+### Get Player Eligible Bonuses
+**Endpoint:** `/api/player/eligible-bonuses`
+
+**Description:** Retrieves a list of bonuses that the specified player is eligible for. Based on the value of the `criteria_type` parameter as `LOGIN`, this API returns all eligible bonuses for the player.
+
+**Request Parameters:**
+- `player_id`: Unique identifier for the player
+- `criteria_type`: Criteria for retrieving bonuses (e.g., `LOGIN`)
+
+**Response Fields:**
+- `player_id`: Unique identifier for the player
+- `criteria_type`: Criteria used for retrieving bonuses
+- `bonuses`: List of eligible bonuses
+  - `bonus_id`: Unique identifier for the bonus
+  - `bonus_name`: Name of the bonus
+  - `bonus_amount`: Amount of the bonus
+  - `expiry_date`: Expiry date of the bonus
+
+**Example Response:**
+```json
+{
+  "player_id": "12345",
+  "criteria_type": "LOGIN",
+  "bonuses": [
+    {
+      "bonus_id": "6789",
+      "bonus_name": "Welcome Bonus",
+      "bonus_amount": "100",
+      "expiry_date": "2024-06-30"
+    },
+    {
+      "bonus_id": "6790",
+      "bonus_name": "Loyalty Bonus",
+      "bonus_amount": "50",
+      "expiry_date": "2024-07-15"
+    }
+  ]
+}
+```
+
+## Player Authentication
+
+Chatform, the leading AI player support platform, provides a robust and customizable player authentication system. This system ensures that player support tickets are managed securely and efficiently, allowing access to necessary player data to resolve issues effectively.
+
+### Customizing Player Authentication Fields
+
+The player authentication process in Chatform is highly flexible, allowing you to define which fields are required for verifying a player's identity. This customization ensures that the authentication process aligns with your casino's specific requirements and security protocols.
+
+#### Example: Email and CPF Authentication
+
+In this example, we will configure the authentication to require both an email address and a CPF (Cadastro de Pessoas Físicas, a Brazilian tax identification number) to verify a player's identity.
+
+1. **Define Authentication Fields**:
+    - Email
+    - CPF
+
+2. **Set Up Authentication in Chatform**:
+    - Navigate to the Chatform admin panel.
+    - Select "Player Authentication Settings."
+    - Add the required fields: Email and CPF.
+    - Save the settings.
+
+### Testing the Authentication Response
+
+Once the authentication fields are set up, you can test the connection to ensure it works correctly. This step is crucial to validate that the integration between the casino backoffice platform and Chatform is functioning as expected.
+
+#### Steps to Test the Authentication:
+
+1. **Initiate a Test Ticket**:
+    - Create a test player support ticket in Chatform.
+    - Enter the required authentication information (Email and CPF).
+
+2. **Send Authentication Request**:
+    - Chatform will send the entered information to the casino backoffice platform for verification.
+
+3. **Verify Response**:
+    - Check the response from the backoffice platform.
+    - If the authentication is successful, the ticket status will be updated to "Authenticated."
+
+### Access to Player Data
+
+Once a ticket is authenticated, Chatform gains access to the player's data. This access is essential for providing context and relevant information to resolve the support ticket efficiently.
+
+#### Benefits of Authenticated Tickets:
+
+- **Secure Data Access**: Only authenticated tickets can access player data, ensuring data security and privacy.
+- **Contextual Support**: Support agents have the necessary context to address player issues promptly.
+- **Improved Resolution Times**: With immediate access to player information, issues can be resolved more quickly.
+
+### Conclusion
+
+Integrating the casino backoffice platform with Chatform enhances the player support experience by providing a secure and customizable authentication process. By setting up and testing the required authentication fields, you ensure that player support tickets are managed effectively, with access to necessary player data to resolve issues promptly.
