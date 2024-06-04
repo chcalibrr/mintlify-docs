@@ -1,4 +1,82 @@
 ---
-description: 'Display inline code and code blocks'
+description: 'Automated Ticket Handling Basics'
 icon: 'wand'
 ---
+
+
+<img
+  src="/images/handling.png"
+  alt="Hero Dark"
+/>
+
+## Ticket Handling Basics
+
+Onboarding a chatform AI is different from building a traditional chatbot. There are no conversational-bot diagrams or flow builders. Instead, onboarding a chatform is similar to how you would onboard a human agent, with explicit guidance and instructions to follow. This approach enables Chatform to have powerful capabilities, allowing it to consider different scenarios and edge cases that are impossible to preprogram, perform various actions on the backend with reasoning, and carry out effective conversations with players.
+
+#### Example Scenario
+
+Let's say a player is contacting support because they are unable to initiate a withdrawal. You can instruct chatform to look at different possibilities when determining how to solve the issue. For example, you might instruct it to check how many **concurrent withdrawals** are active or whether this is the **first withdrawal** that might need to meet a certain minimum of bets volume compared to their first deposit value. The possibilities are endless. Chatforms AI is built and fine-tuned to handle advanced and complex tickets that are usually handled by human agents.
+
+Following these instructions, Chatforms AI can take multiple actions seamlessly, like a human would, such as tagging the conversation, creating a back-office Jira ticket, pulling relevant player information, and responding to the player with a relevant resolution.
+
+## Components of Ticket Handling Automation
+
+### Triggering the Ticket Handling Automation
+
+The ticket handling automation is triggered with advanced reasoning that uses the ticket types name and description. Our models and training are smart enough to make a cognitive decision on which automation to access based on the players's needs. The better the description, the better the results. 
+
+<Tip>We recommend breaking your ticket types into smaller instructions instead of a convoluted all-inclusive setup.</Tip>
+
+**Example:** It's better to have one ticket handling type with the name **"I can't make a withdrawal"** and another for **"I don't see my withdrawal in my account"** instead of making one ticket type that includes both named **"withdrawal issues."**
+
+### Instruct & Guide
+
+The cornerstone of how Chatform handled the support ticket is based on the instructions you give it. You will need to instruct Chatform's AI with your SOPs (standard procedures) and ticket handling instructions so that the AI agent knows what to consider when a ticket reaches it. 
+
+<Info>You can instruct Chatform to perform actions as part of its ticket handling, such as creating a back-office ticket or fetching specific user data, as you will see in the example.</Info>
+
+#### Typical example of how to instruct the AI agent:
+
+```
+When handling deposits, FIRST ask the customer for a screenshot proof of the deposit receipt.
+
+Then, check if the name on the receipt matches the account name.
+
+Once you verify that, check in the back office to see if you see a matching deposit and what its status is.
+
+If it's approved, tell the customer to clear their cache or try incogneto.
+
+If there is no deposit found, tell the customer to check if they have another active account with us, as they might be confusing between brands.
+
+If the issue still persists, create a back-office ticket, tag the ticket with 'no-deposit-found', and tell the player we will get back to them within a few hours.
+```
+#### Tips for instructions
+
+- Break the instructions into short sentences.
+- If something is important, add the word "important" to it, as you would when instructing a human agent.
+- Try to be concise 
+- Be very specific and explain exactly what you want to be done.
+
+### Actions
+
+As the name suggests, actions are the cabilities and tools the AI agent has access to when handling a ticket. Similar to how a human agent can conduct actions beyond just chatting with a player, some examples of typical actions:
+
+- **Creating a back-office ticket**
+- **Escalating the ticket**
+- **Tagging the ticket**
+- **Analyzing an image**
+- **Fetching back-office data**
+- **Alerting the Responsible Gaming (RG) team**
+
+<Note>Actions are created with the actions configuration builder. There are built-in actions as well as the ability to use an API builder to set up external actions to any back office or API.</Note>
+
+### Personality, Tone & Style
+
+Like a typical hiring process for customer service agents, you look for agents who have empathy and can communicate well with a friendly tone and style. However, every brand has it's unique specifications and styles that they might want to incorporate and have their agents adopt when supporting their players.
+
+Below are a few categories that tend to be edited:
+<AccordionGroup>
+  <Accordion title="Emojis"> Some brands do not want their agents' responses to include any emojis, while others with a more playful spirit might want to have emojis in their responses. This is easily editable with a quick toggle from your settings</Accordion>
+  <Accordion title="Verbosity & Length"> The length of the messages and responses is an important part of tone and style. We recommend keeping the response length short, as that's how humans typically communicate (concise and factual). However, some brands might want to have lengthy, descriptive, and informative responses.</Accordion>
+  <Accordion title="Attributes"> As part of tone and style, attaching specific attributes to the AI personality can affect the way it responds and even handles decisions. For example, with real humans, a manager might be more "flexible," while a frontline agent might have to be more "rigid." This is how Chatform looks at attributes; they are not merely tone styles but agent characteristics that affect how you want the agent to handle tickets, decisions, reasoning, and actions.</Accordion>
+</AccordionGroup>

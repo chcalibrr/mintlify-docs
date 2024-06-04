@@ -24,6 +24,7 @@ Chatform offers robust capabilities to connect the AI agent to your backoffice s
 5. **Transaction Details (Deposits, Bets, Withdrawals, Bonuses, timestamps)**
 6. **Bets Placed (Casinos/Sports)**
 7. **Account Bonus Information (Real Balance, Bonus Balance, List of Bonuses)**
+8. **Responsible Gaming Information (Cooloff period, RG limits)**
 
 ## Detailed API Documentation
 
@@ -244,6 +245,10 @@ Once a ticket is authenticated, Chatform gains access to the player's data. This
 - **Secure Data Access**: Only authenticated tickets can access player data, ensuring data security and privacy.
 - **Contextual Support**: Support agents have the necessary context to address player issues promptly.
 - **Improved Resolution Times**: With immediate access to player information, issues can be resolved more quickly.
+
+### Authentication Expiry
+
+Once a player is authenticated, Chatform will be able to access player information and specific data used for ticket handling and decision-making. It is important to know that for security, authentication expires as soon as the ticket is resolved. When the player reaches out again, they will need to re-authenticate.
 
 ### Conclusion
 
